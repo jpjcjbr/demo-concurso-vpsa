@@ -20,8 +20,14 @@ class TerceirosController < ApplicationController
     @terceiro = Terceiro.new
     @terceiro.nome = terceiro_vpsa['nome']
     
-    @latitude = pesquisa[0].geometry['location']['lat']
-    @longitude = pesquisa[0].geometry['location']['lng']
+    if pesquisa[0]
+      @latitude = pesquisa[0].geometry['location']['lat']
+      @longitude = pesquisa[0].geometry['location']['lng']
+      @endereco_formatado = pesquisa[0].formatted_address
+    else
+      @latitude = 0
+      @longitude = 0
+    end
   end
   
   def endereco(terceiro)
